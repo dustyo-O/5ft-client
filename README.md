@@ -24,7 +24,7 @@ You may also run rebuild manually with `enb make` or with external watcher (e.g.
 NO_AUTOMAKE=1 npm run dev
 ```
 
-## Production
+## Продакшн (боевой) сервер
 
 ```sh
 YENV=production enb make
