@@ -76,6 +76,20 @@ app.get('/', function(req, res) {
     })
 });
 
+app.get('/p/:page', function(req, res) {
+    render(req, res, {
+        view: 'page-feed',
+        title: 'Анекдоты: страница ' + req.params.page,
+        meta: {
+            description: 'Page description',
+            og: {
+                url: 'https://site.com',
+                siteName: 'Site name'
+            }
+        }
+    })
+});
+
 isDev && require('./rebuild')(app);
 
 app.get('*', function(req, res) {

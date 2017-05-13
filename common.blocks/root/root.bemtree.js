@@ -32,7 +32,6 @@ block('root').replace()(function() {
             { elem : 'meta', attrs : { name : 'viewport', content : 'width=device-width, initial-scale=1' } }
         ],
         mods: {
-            theme: 'islands',
             view: data.view
         }
     };
