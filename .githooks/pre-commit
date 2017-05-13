@@ -1,45 +1,8 @@
 #!/bin/bash
 
-# pre-commit hook to comb staged .sass files
-# save as .git/hooks/pre-commit
-# make executable: chmod +x .git/hooks/pre-commit
+css = $(git diff --cached --name-only | grep -E '.css' | xargs git diff --cached --diff-filter=ACM -U0 --)
 
-# sources:
-
-# http://www.hagenburger.net/BLOG/Using-Git-Commit-Hooks-to-Autocompile-Sass-to-CSS.html
-# http://stackoverflow.com/questions/8470755/git-pre-commit-hook-add-file-into-index/8471009#8471009
-# http://stackoverflow.com/questions/592620/how-to-check-if-a-program-exists-from-a-bash-script/677212#677212
-# https://gist.github.com/openam/8406343
-
-
-
-# check if sass files are staged for commit
-
-# diff-lines from http://stackoverflow.com/a/12179492/3019532
-# takes the line
-function diff-lines() {
-    local path=
-    local line=
-    while read; do
-        esc=$'\033'
-        if [[ $REPLY =~ ---\ (a/)?.* ]]; then
-            continue
-        elif [[ $REPLY =~ \+\+\+\ (b/)?([^[:blank:]$esc]+).* ]]; then
-            path=${BASH_REMATCH[2]}
-        elif [[ $REPLY =~ @@\ -[0-9]+(,[0-9]+)?\ \+([0-9]+)(,[0-9]+)?\ @@.* ]]; then
-            line=${BASH_REMATCH[2]}
-        elif [[ $REPLY =~ ^($esc\[[0-9;]+m)*([\ +-]) ]]; then
-            echo "Line $line:$REPLY"
-            if [[ ${BASH_REMATCH[2]} != - ]]; then
-                ((line++))
-            fi
-        fi
-    done
-}
-
-
-
-if ! git diff --quiet --cached **/*.css; then
+if [[ css ]]; then
 
             echo ""
             echo "--> you checked in css files. lets comb them..."
@@ -102,8 +65,8 @@ if ! git diff --quiet --cached **/*.css; then
                 echo "--> (you need to change and stage a css file again to see it work on the next commit...)"
                 echo ""
             fi
-
 fi
+
 
 # Necessary check for initial commit
 against="2dbc9309507e421dc3f468a6ec38905c5362a2e7"
