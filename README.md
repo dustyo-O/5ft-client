@@ -1,18 +1,13 @@
-# bem-express
+# Верстка для 5ft.ru на bem-express
 
-Almost the same as [project-stub](https://github.com/bem/project-stub/) but with [BEMTREE](https://en.bem.info/technology/bemtree/) and [Express](http://expressjs.com/).
-
-[![Build Status](https://travis-ci.org/bem/bem-express.svg?branch=master)](https://travis-ci.org/bem/bem-express)
-
-## Installation
+## Установка
 
 ```sh
-git clone https://github.com/bem/bem-express.git
-cd bem-express
+git clone https://github.com/dustyo-O/5ft-client.git .
 npm i
 ```
 
-## Development
+## Разработка
 
 ```sh
 npm run dev
