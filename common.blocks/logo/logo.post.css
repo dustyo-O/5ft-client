@@ -1,0 +1,11 @@
+.logo{
+    white-space: nowrap;
+    
+    & .icon {
+        width: 18px;
+
+        & path {
+            fill: white;
+        }
+    }
+}

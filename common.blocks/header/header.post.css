@@ -1,0 +1,21 @@
+.header {
+    color: #fff;
+    height: 240px;
+    overflow: hidden;
+
+    &__panel {
+        display: flex;
+
+        & > * {
+            vertical-align: top;
+        }
+    }
+    
+    &__social-icon {
+        width: 18px;
+
+        & path {
+            fill: white;
+        }
+    } 
+}

@@ -1,8 +1,9 @@
 ({
     shouldDeps: [
-        'container',
         { 
-            elems: ['image', 'wrapper']
+            elems: [
+                'item'
+            ]
         }
     ]
 });
