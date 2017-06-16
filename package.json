@@ -28,6 +28,8 @@
     "express": "^4.13.4",
     "express-session": "^1.13.0",
     "gemini": "^4.18.1",
+    "gemini-gui": "^5.0.0-alpha.2",
+    "gemini-sauce": "^1.0.1",
     "lodash": "^4.11.2",
     "morgan": "^1.7.0",
     "node-eval": "^1.1.0",
