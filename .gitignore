@@ -5,6 +5,9 @@ node_modules/
 .svn
 npm-debug.log
 
+#gemini
+gemini-report/
+
 static/index.min.*
 
 # bem
