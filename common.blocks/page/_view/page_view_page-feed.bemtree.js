@@ -1,7 +1,7 @@
 block('page').mod('view', 'page-feed').content()(function() {
     return [
         {
-            block: 'navbar'
+            block: 'header'
         },
         {
             block: 'body'
