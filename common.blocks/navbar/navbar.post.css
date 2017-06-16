@@ -1,0 +1,5 @@
+.navbar {
+    &_align_right {
+        float: right;
+    }
+}

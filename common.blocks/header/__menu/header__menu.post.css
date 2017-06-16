@@ -1,0 +1,9 @@
+.header__menu {
+    flex-grow: 1;
+
+    overflow: hidden;
+
+    height: 60px;
+    line-height: 30px;
+    box-sizing: border-box;
+}
