@@ -1,6 +1,11 @@
+var ENV = process.env,
+    CI = ENV.CI;
+
 module.exports = {
     rootUrl: 'http://localhost:3000',
-    gridUrl: 'http://ondemand.saucelabs.com:80/wd/hub',
+    gridUrl: 'http://' + 
+        (CI ? ENV.SAUCE_USERNAME + ':' + ENV.SAUCE_ACCESS_KEY + '@' : '') + 
+        'ondemand.saucelabs.com:80/wd/hub',
     browsers: {
         chrome: {
             desiredCapabilities: {
@@ -9,7 +14,7 @@ module.exports = {
         }
     },
     system: {
-        plugins: {
+        plugins: CI ? undefined : {
             sauce: {
             }
         }
