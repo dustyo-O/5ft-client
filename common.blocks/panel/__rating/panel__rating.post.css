@@ -1,0 +1,32 @@
+.panel__rating {
+    float: right;
+
+    height: 60px;
+    font-size: 16px;
+    margin: 17px;
+
+    & .icon {
+        width: 18px;
+
+        & path {
+            fill: #4caf50;
+        }
+    }
+
+    & .button {
+        border: 0;
+        background: none;
+    }
+
+    & .panel__dislike {
+        width: 18px;
+        height: 18px;
+
+        vertical-align: middle;
+
+        margin-left: 5px;
+
+        background: url('broken-heart.svg');
+        background-size: cover;
+    }
+}

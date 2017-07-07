@@ -4,7 +4,10 @@ block('page').mod('view', 'page-feed').content()(function() {
             block: 'header'
         },
         {
-            block: 'body'
+            block: 'body',
+            content: {
+                block: 'feed'
+            }
         },
         {
             block: 'footer'

@@ -36,3 +36,9 @@ block('root').replace()(function() {
         }
     };
 });
+
+var borschik = {
+    link: function(str) {
+        return str;
+    }
+};
