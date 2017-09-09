@@ -90,7 +90,7 @@ module.exports = function(config) {
             }],
 
             // borschik
-            [techs.borschik, { source: '?.js', target: '?.min.js', minify: isProd }],
+            [techs.borschik, { source: '?.js', target: '?.min.js', minify: isProd, freeze: true }],
             [techs.borschik, { source: '?.css', target: '?.min.css', minify: isProd, freeze: true }],
 
             [techs.fileCopy, { source: '?.min.js', target: '../../static/?.min.js' }],
