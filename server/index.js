@@ -23,6 +23,8 @@ var fs = require('fs'),
     render = Render.render,
     dropCache = Render.dropCache, // eslint-disable-line no-unused-vars
 
+    api = require('./api');
+
     port = process.env.PORT || config.defaultPort,
     isSocket = isNaN(port),
     isDev = process.env.NODE_ENV === 'development';
@@ -76,6 +78,9 @@ app.get('/', function(req, res) {
     })
 });
 
+/**
+ * Страницы анекдотов
+ */
 app.get('/p/:page', function(req, res) {
     render(req, res, {
         view: 'page-feed',
@@ -86,9 +91,14 @@ app.get('/p/:page', function(req, res) {
                 url: 'https://site.com',
                 siteName: 'Site name'
             }
-        }
+        },
+        aneks: api.aneks(req, null, { page: req.params.page })
     })
 });
+
+app.get('/api/aneks/:page', function(req, res){
+    api.aneks(req, res, { page: req.params.page });
+})
 
 isDev && require('./rebuild')(app);
 

@@ -1,7 +1,15 @@
 .header {
-    color: #fff;
-    height: 240px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
     overflow: hidden;
+    z-index: 10;
+
+    height: 240px;
+ 
+    color: #fff;
+    background: #000;
 
     &__panel {
         display: flex;
@@ -17,5 +25,10 @@
         & path {
             fill: white;
         }
+    }
+
+    &_fixed {
+        position: fixed;
+        top: -180px;
     } 
 }
