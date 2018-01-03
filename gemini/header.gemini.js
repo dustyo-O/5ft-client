@@ -1,10 +1,17 @@
-gemini.suite('header', (suite) => {
-    suite.setUrl('/')
+gemini.suite('header/full', suite => {
+    suite.setUrl('/p/1')
         .setCaptureElements('.header')
-        .capture('plain')
-        .capture('scrolled', function(actions) {
-            actions.executeJS(function(window) {
-                window.scrollBy(0, 200);
+        .capture('plain');
+});
+
+gemini.suite('header/fixed', suite => {
+    suite.setUrl('/p/1')
+        .setCaptureElements('.header__wrapper')
+        .capture('plain', function (actions) {
+            actions.executeJS(function (window) {
+                window.document.querySelector('.footer').scrollIntoView(false);
             });
+
+            actions.waitForElementToShow('.header_fixed');
         });
 });

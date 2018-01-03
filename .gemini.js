@@ -3,18 +3,21 @@ var ENV = process.env,
 
 module.exports = {
     rootUrl: 'http://localhost:3000',
-    gridUrl: 'http://' + 
-        (CI ? ENV.SAUCE_USERNAME + ':' + ENV.SAUCE_ACCESS_KEY + 
-        '@ondemand.saucelabs.com:80/wd/hub' : '127.0.0.1:4444/wd/hub'),
+    gridUrl: 'http://' +
+        (CI ? ENV.SAUCE_USERNAME + ':' + ENV.SAUCE_ACCESS_KEY : '' ) +
+        '@ondemand.saucelabs.com:80/wd/hub',
     browsers: {
         chrome: {
+            httpTimeout: 120000,
+            windowSize: '1280x1024',
+            sessionsPerBrowser: 1,
             desiredCapabilities: {
                 browserName: 'chrome'
             }
         }
     },
     system: {
-        plugins: CI ? undefined : {
+        plugins: {
             sauce: {
             }
         }
