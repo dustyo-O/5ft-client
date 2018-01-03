@@ -1,6 +1,7 @@
 ({
     shouldDeps: [
-        { block: 'icon', mods: { glyph: 'heart-o' } },
-        { block: 'button', mods: { view: 'plain' } }
+        'label',
+        { block: 'icon', mods: { glyph: ['heart', 'heart-o'] } },
+        { block: 'button', mods: { view: 'plain' } },
     ]
 })

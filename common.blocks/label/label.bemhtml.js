@@ -1,0 +1,1 @@
+block('label').tag()('span');
