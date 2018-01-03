@@ -98,7 +98,15 @@ app.get('/p/:page', function(req, res) {
 
 app.get('/api/aneks/:page', function(req, res){
     api.aneks(req, res, { page: req.params.page });
-})
+});
+
+app.post('/api/like/:anek', function(req, res){
+    api.like(req, res, { anek: req.params.anek });
+});
+
+app.post('/api/dislike/:anek', function(req, res){
+    api.dislike(req, res, { anek: req.params.anek });
+});
 
 isDev && require('./rebuild')(app);
 

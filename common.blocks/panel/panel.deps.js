@@ -1,7 +1,7 @@
 ({
     shouldDeps: [
         {
-            elems: ['number', 'rating']
+            elems: ['number', 'like', 'dislike', 'rating']
         }
     ]
 });

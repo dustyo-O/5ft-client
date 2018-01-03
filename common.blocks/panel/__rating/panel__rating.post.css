@@ -13,6 +13,26 @@
         }
     }
 
+    & .panel__like {
+        transition: all 2s;
+        
+        .panel__rating_dislike& {
+            opacity: 0;
+        }
+
+        & .icon_glyph_heart {
+            position: absolute;
+
+            opacity: 0;
+
+            transition: all 2s;
+
+            .panel__rating_like& {
+                opacity: 1;
+            }
+        }
+    }
+
     & .button {
         border: 0;
         background: none;
@@ -28,5 +48,11 @@
 
         background: url('broken-heart.svg');
         background-size: cover;
+
+        transition: all 2s;
+
+        .panel__rating_like& {
+            opacity: 0;
+        }
     }
 }

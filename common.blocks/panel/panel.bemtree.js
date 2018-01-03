@@ -18,6 +18,7 @@ block('panel').content()(function() {
             mods: rating !== 0 && {
                  positive: rating > 0 ? 'yes' : 'no'
             },
+            id: id,
             rating: rating
         }
     ];
