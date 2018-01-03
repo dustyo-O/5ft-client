@@ -15,7 +15,7 @@
 
     & .panel__like {
         transition: all 2s;
-        
+
         .panel__rating_dislike& {
             opacity: 0;
         }
@@ -35,6 +35,7 @@
 
     & .button {
         border: 0;
+        outline: none;
         background: none;
     }
 
