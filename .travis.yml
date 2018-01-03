@@ -1,5 +1,17 @@
 language: node_js
 node_js:
-  - "node"
-  - "6"
-  - "4"
+- node
+- '8'
+install:
+- npm install
+- enb make
+script:
+- node server &
+- gemini test
+after_script:
+- killall node
+env:
+  global:
+  - CI=1
+  - SAUCE_USERNAME=dustyo_O
+  - secure: TsrpWpqUtP6J1VQrIEo4MKAqEUK5PSbeSXpR1dJZnlu+kjW46PulAlf6j0WxD5EuuKNWym1n9gsm4IuVlGIMxS5j+SwaCLHMmAdhPMNNeQWQuoXTRuPpVvKnBJpZ79v6Xo4o+SEBWHeHAR087sW5gsWFI2tuEOYL70Hbm6AJ4DglShaanbFKhMVxK2tiFxQCwnG+dYBLwmtU6Ojq9cyRoxt6b+1dluYdMMgeczk5xs6PxRtk6/zwDSsLLuMrF8NhxbA++FB47JN3m2HmH5pkN91YtUscDGkEbN+8BSS+ZP6XhonaiPe2vaYG1Pw2TPm9dbrSsI4k5bRYGwzVbQ+pIcExi7QOooxHC/mtm7g0JXtRfPDt5pfmsIlRc92OH9czPsxIUCd2aYzh5ZzK80d1hw1gDpPXG/XPv/KQxowPyzboJuALHUQpz0mxlJy/I46zYrYrGAtaFalajxnPE4YE2g1c63xji0VcGk9w+xJumG3gv82G/Kj7RJ4Nw412ZR0l5Apm+kIp0ch/1DlHaST+8HBvKDglOT0NmqqUtt+h+O4asTW03ep2OINraX0qWJLVg1Edfw/5qJM4iGCz2ppZiGTPjbDl6GThEau2tcg/xiOrj3tM8CVVGnlHHoSM9b+9QUL9qXBzN928V3OjiY9M5gj4JsYieb1EzhfCBpYNZDQ=
