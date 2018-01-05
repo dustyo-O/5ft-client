@@ -6,8 +6,11 @@ block('page').mod('view', 'page-feed').content()(function() {
         {
             block: 'body',
             content: {
-                block: 'feed'
+                block: 'feed',
             }
+        },
+        {
+            block: 'pager'
         },
         {
             block: 'footer'

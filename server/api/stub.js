@@ -7,7 +7,13 @@ fs = require('fs');
  * @param {*} res {express response}
  */
 function stub(fileName, res) {
-    var data = fs.readFileSync('./server/api/stubs/' + fileName, 'utf-8');
+    var data;
+
+    try {
+        data = fs.readFileSync('./server/api/stubs/' + fileName, 'utf-8');
+    } catch (error) {
+        return undefined;
+    }
 
     if (res) {
         res.setHeader('Content-Type', 'application/json');

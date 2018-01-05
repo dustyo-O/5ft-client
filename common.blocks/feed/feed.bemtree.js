@@ -1,4 +1,4 @@
-block('feed').content()(function() {
+block('feed').replace()(function() {
     var data = this.data,
         aneks = data ? data.aneks : undefined;
 
@@ -7,5 +7,10 @@ block('feed').content()(function() {
             block: 'anek',
             anek: anek
         }
-    }) : 'Нет больше анекдотов';
+    }) : {
+        block: 'panel',
+        data: {
+            content: 'Нет больше анекдотов'
+        }
+    };
 });
