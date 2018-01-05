@@ -1,5 +1,6 @@
 ({
+    mustDeps: 'i-bem-dom',
     shouldDeps: [
-        'feed'
+        'body', 'feed', 'pager'
     ]
 });

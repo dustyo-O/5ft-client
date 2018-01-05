@@ -82,6 +82,8 @@ app.get('/', function(req, res) {
  * Страницы анекдотов
  */
 app.get('/p/:page', function(req, res) {
+    var isAjax = req.rawHeaders.indexOf('XMLHttpRequest') !== -1;
+
     render(req, res, {
         view: 'page-feed',
         title: 'Анекдоты: страница ' + req.params.page,
@@ -93,18 +95,20 @@ app.get('/p/:page', function(req, res) {
             }
         },
         aneks: api.aneks(req, null, { page: req.params.page })
-    })
+    }, isAjax && {
+        block: 'feed'
+    }, isAjax);
 });
 
-app.get('/api/aneks/:page', function(req, res){
+app.get('/api/aneks/:page', function(req, res) {
     api.aneks(req, res, { page: req.params.page });
 });
 
-app.post('/api/like/:anek', function(req, res){
+app.post('/api/like/:anek', function(req, res) {
     api.like(req, res, { anek: req.params.anek });
 });
 
-app.post('/api/dislike/:anek', function(req, res){
+app.post('/api/dislike/:anek', function(req, res) {
     api.dislike(req, res, { anek: req.params.anek });
 });
 

@@ -12,7 +12,7 @@ var fs = require('fs'),
     cacheTTL = config.cacheTTL,
     cache = {};
 
-function render(req, res, data, context) {
+function render(req, res, data, context, isAjax) {
     var query = req.query,
         user = req.user,
         cacheKey = req.originalUrl + (context ? JSON.stringify(context) : '') + (user ? JSON.stringify(user) : ''),
@@ -45,6 +45,7 @@ function render(req, res, data, context) {
     }
 
     if (isDev && query.bemjson) return res.send('<pre>' + JSON.stringify(bemjson, null, 4) + '</pre>');
+    if (isAjax) return res.send(JSON.stringify(bemjson, null, 4));
 
     try {
         var html = templates.BEMHTML.apply(bemjson);
