@@ -1,7 +1,7 @@
 ({
     shouldDeps: [
         {
-            mods: { view: ['404', 'page-feed'] }
+            mods: { view: ['404', 'page-feed', 'page-anek'] }
         },
         'material',
         'header',

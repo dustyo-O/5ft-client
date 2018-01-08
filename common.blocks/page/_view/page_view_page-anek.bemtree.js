@@ -1,4 +1,4 @@
-block('page').mod('view', 'page-feed').content()(function() {
+block('page').mod('view', 'page-anek').content()(function () {
     return [
         {
             block: 'header'
@@ -6,11 +6,9 @@ block('page').mod('view', 'page-feed').content()(function() {
         {
             block: 'body',
             content: {
-                block: 'feed'
+                block: 'feed',
+                mods: { single: true }
             }
-        },
-        {
-            block: 'pager'
         },
         {
             block: 'footer'
