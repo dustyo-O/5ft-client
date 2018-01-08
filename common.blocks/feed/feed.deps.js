@@ -1,5 +1,6 @@
 ({
     shouldDeps: [
-        'anek'
+        'anek',
+        { mods: ['single'] }
     ]
 })
