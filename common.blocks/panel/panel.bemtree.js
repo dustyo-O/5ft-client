@@ -1,7 +1,7 @@
 block('panel').content()(function() {
     var data = this.ctx.data || this.data.data || {},
         content = data.content,
-        rating = data.rating,
+        rate = data.rate,
         id = data.id;
 
     return [
@@ -13,13 +13,13 @@ block('panel').content()(function() {
             elem: 'number',
             id: id
         },
-        rating !== undefined && {
+        rate !== undefined && {
             elem: 'rating',
-            mods: rating !== 0 && {
-                 positive: rating > 0 ? 'yes' : 'no'
+            mods: rate !== 0 && {
+                 positive: rate > 0 ? 'yes' : 'no'
             },
             id: id,
-            rating: rating
+            rate: rate
         }
     ];
 });

@@ -17,7 +17,7 @@ block('panel').elem('rating')(
             {
                 block: 'label',
                 mix: { block: block, elem: 'label' },
-                content: this.ctx.rating
+                content: this.ctx.rate
             },
             {
                 block: 'button',
