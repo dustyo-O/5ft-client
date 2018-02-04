@@ -7,20 +7,22 @@ fs = require('fs');
  * @param {*} res {express response}
  */
 function stub(fileName, res) {
-    var data;
+    return new Promise(function(resolve, reject) {
+        fs.readFile('./server/api/stubs/' + fileName, 'utf-8', function (error, data) {
 
-    try {
-        data = fs.readFileSync('./server/api/stubs/' + fileName, 'utf-8');
-    } catch (error) {
-        return undefined;
-    }
+            if (error) {
+                resolve(undefined);
+            }
 
-    if (res) {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(data);
-    }
+            if (res) {
+                res.setHeader('Content-Type', 'application/json');
+                res.send(data);
+                resolve(res);
+            }
 
-    return JSON.parse(data);
+            resolve(data && JSON.parse(data));
+        });
+    });
 }
 
 module.exports = stub;

@@ -32,6 +32,7 @@
     "gemini-gui": "^5.0.0-alpha.2",
     "lodash": "^4.11.2",
     "morgan": "^1.7.0",
+    "mysql": "^2.15.0",
     "node-eval": "^1.1.0",
     "object-assign": "^4.1.0",
     "passport": "^0.3.2",

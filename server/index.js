@@ -85,31 +85,36 @@ app.get('/p/:page', function(req, res) {
     const isAjax = req.rawHeaders.indexOf('XMLHttpRequest') !== -1,
         page = req.params.page;
 
-    render(req, res, {
-        view: 'page-feed',
-        title: 'Анекдоты: страница ' + page,
-        aneks: api.aneks(req, null, { page })
-    }, isAjax && {
-        block: 'feed'
-    }, isAjax);
+    api.aneks(req, null, { page }).then(aneks => {
+        render(req, res, {
+            view: 'page-feed',
+            title: 'Анекдоты: страница ' + page,
+            aneks: aneks
+        }, isAjax && {
+            block: 'feed'
+        }, isAjax);
+    });
 });
 
 /**
  * Один анекдот
  */
 app.get('/a/:id', function (req, res) {
-    const id = req.params.id,
-        anek = api.anek(req, null, { id });
+    const id = req.params.id;
 
-    if (!anek) {
-        res.status(404);
-    }
+    api.anek(req, null, { id })
+        .then(anek => {
+            if (!anek) {
+                res.status(404);
+            }
 
-    render(req, res, {
-        view: 'page-anek',
-        title: 'Анекдот #' + id,
-        aneks: anek
-    });
+            render(req, res, {
+                view: 'page-anek',
+                title: 'Анекдот #' + id,
+                aneks: anek
+            });
+        });
+
 });
 
 app.get('/api/aneks/:page', function(req, res) {
@@ -117,11 +122,11 @@ app.get('/api/aneks/:page', function(req, res) {
 });
 
 app.post('/api/like/:anek', function(req, res) {
-    api.like(req, res, { anek: req.params.anek });
+    api.like(req, res, { anek: req.params.anek }).then(result => res.send(result));
 });
 
 app.post('/api/dislike/:anek', function(req, res) {
-    api.dislike(req, res, { anek: req.params.anek });
+    api.dislike(req, res, { anek: req.params.anek }).then(result => res.send(result));
 });
 
 isDev && require('./rebuild')(app);

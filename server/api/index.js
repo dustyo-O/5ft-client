@@ -1,20 +1,26 @@
-var stub = require('./stub');
+const enableStubs = process.env.CI || process.env.STUBS,
+    stub = require('./stub'),
+    Model = require('./model');
 
 module.exports = {
-    aneks: function(req, res, data) {
+    aneks: function (req, res, data) {
         const page = Number(data && data.page);
 
-        return stub('aneks-' + page + '.json', res);
+        return enableStubs ? stub('aneks-' + page + '.json', res) :
+            Model.aneks({ page: page });
     },
     anek: function (req, res, data) {
         const id = Number(data && data.id);
 
-        return stub('anek-' + id + '.json', res);
+        return enableStubs ? stub('anek-' + id + '.json', res) :
+            Model.anek({ id: id });
     },
-    like: function(req, res) {
-        return stub('like.json', res);
+    like: function (req, res, params) {
+        return enableStubs ? stub('like.json', res) :
+            Model.like(params.anek);
     },
-    dislike: function(req, res) {
-        return stub('dislike.json', res);
+    dislike: function (req, res, params) {
+        return enableStubs ? stub('dislike.json', res) :
+            Model.dislike(params.anek);
     }
 };

@@ -1,4 +1,4 @@
-modules.define('panel__dislike', ['i-bem-dom'], function(provide, bemDom) {
+modules.define('panel__dislike', ['i-bem-dom', 'button'], function(provide, bemDom, Button) {
 
 provide(bemDom.declElem('panel', 'dislike',
 {
@@ -10,7 +10,7 @@ provide(bemDom.declElem('panel', 'dislike',
     lazyInit: true,
 
     onInit: function() {
-        this._domEvents().on('click', this.prototype._onClick);
+        this._domEvents(Button).on('click', this.prototype._onClick);
     }
 }));
 

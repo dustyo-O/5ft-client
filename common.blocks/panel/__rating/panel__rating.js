@@ -1,5 +1,5 @@
-modules.define('panel__rating', 
-['i-bem-dom', 'panel__like', 'panel__dislike', 'jquery'], 
+modules.define('panel__rating',
+['i-bem-dom', 'panel__like', 'panel__dislike', 'jquery'],
 function(provide, bemDom, panelLike, panelDislike, $) {
 
 provide(bemDom.declElem('panel', 'rating',
@@ -18,7 +18,7 @@ provide(bemDom.declElem('panel', 'rating',
     },
 
     _onLike(response) {
-        this._label.domElem.text(response.rating);
+        this._label.domElem.text(response.rate);
     },
 
     _dislike() {
@@ -26,13 +26,13 @@ provide(bemDom.declElem('panel', 'rating',
     },
 
     _onDislike(response) {
-        this._label.domElem.text(response.rating);
+        this._label.domElem.text(response.rate);
         this.setMod('dislike');
     },
 
     _vote(type) {
         const params = this.params;
-        
+
         $.ajax({
             url: '/api/' + type + '/' + params.id,
             data: {
