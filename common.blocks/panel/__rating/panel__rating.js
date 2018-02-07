@@ -12,7 +12,12 @@ provide(bemDom.declElem('panel', 'rating',
         }
     },
 
+    _voted() {
+        return this.hasMod('like') || this.hasMod('dislike');
+    },
+
     _like() {
+        if (this._voted()) return;
         this._vote('like');
         this.setMod('like');
     },
@@ -22,12 +27,13 @@ provide(bemDom.declElem('panel', 'rating',
     },
 
     _dislike() {
+        if (this._voted()) return;
         this._vote('dislike');
+        this.setMod('dislike');
     },
 
     _onDislike(response) {
         this._label.domElem.text(response.rate);
-        this.setMod('dislike');
     },
 
     _vote(type) {
