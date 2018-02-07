@@ -7,19 +7,19 @@ block('header').content()(function() {
             },
             {
                 title: 'Лучшие за все время',
-                url: '#'
+                url: '/bestaneks/p/1'
             },
             {
                 title: 'За год',
-                url: '#'
+                url: '/bestyear/p/1'
             },
             {
                 title: 'За месяц',
-                url: '#'
+                url: '/bestmonth/p/1'
             },
             {
                 title: 'За неделю',
-                url: 'Documentation'
+                url: '/bestweek/p/1'
             }
         ];
 

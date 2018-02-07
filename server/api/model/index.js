@@ -32,6 +32,31 @@ module.exports = {
         });
     },
 
+    bestAneks(params = {}) {
+        const page = params.page || 1;
+        const date = params.date || '0000-00-00';
+        const limitFrom = (page - 1) * 50;
+
+        return new Promise(function (resolve, reject) {
+            pool.getConnection(function (err, connection) {
+                if (err || !connection) {
+                    reject('mysql connection error');
+                } else {
+                    connection.query(
+                        `SELECT * FROM aneks WHERE \`date\` > '${date}' ORDER BY rate DESC LIMIT ${limitFrom}, 50`,
+                        function (err, rows) {
+                            if (!err) {
+                                resolve(rows);
+                            }
+                        }
+                    );
+                }
+
+                if (connection) connection.release();
+            });
+        });
+    },
+
     anek(params = {}) {
         const id = params.id;
 

@@ -64,18 +64,17 @@ app.get('/ping/', function(req, res) {
     res.send('ok');
 });
 
+/**
+ * Главная страница
+ */
 app.get('/', function(req, res) {
-    render(req, res, {
-        view: 'page-index',
-        title: 'Main page',
-        meta: {
-            description: 'Page description',
-            og: {
-                url: 'https://site.com',
-                siteName: 'Site name'
-            }
-        }
-    })
+    api.aneks(req, null, { page: 1 }).then(aneks => {
+        render(req, res, {
+            view: 'page-feed',
+            title: 'Анекдоты: страница 1',
+            aneks: aneks
+        });
+    });
 });
 
 /**
@@ -90,6 +89,94 @@ app.get('/p/:page', function(req, res) {
             view: 'page-feed',
             title: 'Анекдоты: страница ' + page,
             aneks: aneks
+        }, isAjax && {
+            block: 'feed'
+        }, isAjax);
+    });
+});
+
+/**
+ * Лучшие анекдоты
+ */
+app.get('/bestaneks/p/:page', function (req, res) {
+    const isAjax = req.rawHeaders.indexOf('XMLHttpRequest') !== -1,
+        page = req.params.page;
+
+    api.bestAneks(req, null, { page }).then(aneks => {
+        render(req, res, {
+            view: 'page-feed',
+            title: 'Лучшие анекдоты: страница ' + page,
+            aneks: aneks,
+            page: 'bestaneks'
+        }, isAjax && {
+            block: 'feed'
+        }, isAjax);
+    });
+});
+
+/**
+ * Лучшие за год
+ */
+app.get('/bestyear/p/:page', function (req, res) {
+    const isAjax = req.rawHeaders.indexOf('XMLHttpRequest') !== -1,
+        page = req.params.page,
+        date = (new Date()).toISOString().slice(0, 10),
+        yearAgo = (parseInt(date.slice(0, 4)) - 1).toString() + date.slice(4);
+
+    api.bestAneks(req, null, { page, date: yearAgo }).then(aneks => {
+        render(req, res, {
+            view: 'page-feed',
+            title: 'Лучшие анекдоты: страница ' + page,
+            aneks: aneks,
+            page: 'bestyear'
+        }, isAjax && {
+            block: 'feed'
+        }, isAjax);
+    });
+});
+
+/**
+ * Лучшие за месяц
+ */
+app.get('/bestmonth/p/:page', function (req, res) {
+    const isAjax = req.rawHeaders.indexOf('XMLHttpRequest') !== -1,
+        page = req.params.page,
+        date = new Date(),
+        year = date.getFullYear(),
+        month = date.getMonth(),
+        day = date.getDate(),
+        monthAgo = new Date(year, +month - 1, day).toISOString().slice(0, 10);
+
+    api.bestAneks(req, null, { page, date: monthAgo }).then(aneks => {
+        render(req, res, {
+            view: 'page-feed',
+            title: 'Лучшие анекдоты: страница ' + page,
+            aneks: aneks,
+            page: 'bestmonth'
+        }, isAjax && {
+            block: 'feed'
+        }, isAjax);
+    });
+});
+
+/**
+ * Лучшие за неделю
+ */
+app.get('/bestweek/p/:page', function (req, res) {
+    const isAjax = req.rawHeaders.indexOf('XMLHttpRequest') !== -1,
+        page = req.params.page,
+        date = new Date(),
+        year = date.getFullYear(),
+        month = date.getMonth(),
+        day = date.getDate(),
+        weekAgo = new Date(year, month, +day - 7).toISOString().slice(0, 10);
+
+    api.bestAneks(req, null, { page, date: weekAgo }).then(aneks => {
+        render(req, res, {
+            view: 'page-feed',
+            title: 'Лучшие анекдоты: страница ' + page,
+            aneks: aneks,
+            page: 'bestweek'
         }, isAjax && {
             block: 'feed'
         }, isAjax);

@@ -1,5 +1,6 @@
 .navbar__item {
     float: left;
     padding: 15px;
-    color: rgba(255, 255, 255, .84)
+    color: rgba(255, 255, 255, .84);
+    text-decoration: none;
 }
