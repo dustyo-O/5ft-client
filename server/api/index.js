@@ -16,6 +16,10 @@ module.exports = {
         return enableStubs ? stub('aneks-' + page + '.json', res) :
             Model.bestAneks({ page, date });
     },
+    randomAneks: function (req, res) {
+        return enableStubs ? stub('aneks-1.json', res) :
+            Model.randomAneks();
+    },
     anek: function (req, res, data) {
         const id = Number(data && data.id);
 

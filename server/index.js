@@ -183,6 +183,28 @@ app.get('/bestweek/p/:page', function (req, res) {
     });
 });
 
+
+/**
+ * Случайные
+ */
+var randomController = function (req, res) {
+    const isAjax = req.rawHeaders.indexOf('XMLHttpRequest') !== -1;
+
+    api.randomAneks(req).then(aneks => {
+        render(req, res, {
+            view: 'page-feed',
+            title: 'Случайные анекдоты',
+            aneks: aneks,
+            page: 'random'
+        }, isAjax && {
+            block: 'feed'
+        }, isAjax);
+    });
+};
+
+app.get('/random', randomController);
+app.get('/random/p/:page', randomController);
+
 /**
  * Один анекдот
  */

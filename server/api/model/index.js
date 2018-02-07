@@ -57,6 +57,27 @@ module.exports = {
         });
     },
 
+    randomAneks() {
+        return new Promise(function (resolve, reject) {
+            pool.getConnection(function (err, connection) {
+                if (err || !connection) {
+                    reject('mysql connection error');
+                } else {
+                    connection.query(
+                        `SELECT * FROM aneks WHERE RAND() <= 0.0005 LIMIT 50`,
+                        function (err, rows) {
+                            if (!err) {
+                                resolve(rows);
+                            }
+                        }
+                    );
+                }
+
+                if (connection) connection.release();
+            });
+        });
+    },
+
     anek(params = {}) {
         const id = params.id;
 

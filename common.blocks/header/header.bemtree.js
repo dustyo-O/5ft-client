@@ -3,7 +3,7 @@ block('header').content()(function() {
         menuItems = [
             {
                 title: 'Случайный подбор',
-                url: '#'
+                url: '/random'
             },
             {
                 title: 'Лучшие за все время',
