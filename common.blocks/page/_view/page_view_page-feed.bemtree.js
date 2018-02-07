@@ -5,6 +5,9 @@ block('page').mod('view', 'page-feed').content()(function() {
         },
         {
             block: 'body',
+            js: {
+                page: this.data.page
+            },
             content: {
                 block: 'feed'
             }

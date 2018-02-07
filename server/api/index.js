@@ -7,7 +7,14 @@ module.exports = {
         const page = Number(data && data.page);
 
         return enableStubs ? stub('aneks-' + page + '.json', res) :
-            Model.aneks({ page: page });
+            Model.aneks({ page });
+    },
+    bestAneks: function (req, res, data) {
+        const page = Number(data && data.page);
+        const date = data.date;
+
+        return enableStubs ? stub('aneks-' + page + '.json', res) :
+            Model.bestAneks({ page, date });
     },
     anek: function (req, res, data) {
         const id = Number(data && data.id);

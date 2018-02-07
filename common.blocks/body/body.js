@@ -20,7 +20,7 @@ provide(bemDom.declBlock(this.name,
 
         loadPage(page) {
             $.ajax({
-                url: '/p/' + (page + 1) + '/',
+                url: '/' + (this.params.page ? this.params.page + '/' : '') + 'p/' + (page + 1) + '/',
                 context: this,
                 cache: false,
                 dataType: 'json'
