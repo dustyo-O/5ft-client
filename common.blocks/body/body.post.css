@@ -2,3 +2,9 @@
     max-width: 998px;
     margin: 320px auto 0;
 }
+
+@media screen and (max-width: 768px) {
+    .body {
+        margin-top: 240px;
+    }
+}

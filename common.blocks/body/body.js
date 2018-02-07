@@ -10,7 +10,10 @@ provide(bemDom.declBlock(this.name,
                     this.layout = new this.Bricks({
                         container: '.body',
                         packed: 'data-packed',
-                        sizes: [{ columns: 2, gutter: 30 }]
+                        sizes: [
+                            { columns: 1, gutter: 0 },
+                            { mq: '768px', columns: 2, gutter: 30 }
+                        ]
                     });
 
                     this.layout.pack();
