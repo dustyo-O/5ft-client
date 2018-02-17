@@ -209,23 +209,111 @@ app.get('/random/p/:page', randomController);
  * Один анекдот
  */
 app.get('/a/:id', function (req, res) {
-    const id = req.params.id;
-
-    api.anek(req, null, { id })
-        .then(anek => {
-            if (!anek) {
-                res.status(404);
+    function generateAnekTitle(anek) {
+        let anekpie = anek.text.replace(/<\/?[^>]+(>|$)/g, "").split(' '),
+            i = 0,
+            minus = 0,
+            wordsInTitle = 0,
+            result = '';
+        const badWords = ['а', 'не', 'или', 'и', 'но', 'да', 'же', 'для', 'чтобы', 'как', 'словно', 'однако', 'если', 'что', 'так', 'о', 'в', 'из'],
+            maxWordsInTitle = 8;
+        // формируем список слов, либо до точки
+        while ((i - minus) < maxWordsInTitle) {
+            if ((anekpie[i].length) < 1) {
+                minus++;
+                i++;
+                continue;
             }
 
-            render(req, res, {
-                view: 'page-anek',
-                title: 'Анекдот #' + id,
-                aneks: anek
-            });
-        });
+            if ((anekpie[i].length === 1) || (badWords.indexOf(anekpie[i]) !== -1)) {
+                result += anekpie[i] + ' ';
 
+                wordsInTitle++;
+                minus++;
+                i++;
+
+                continue;
+            }
+
+            result += anekpie[i];
+
+            wordsInTitle++;
+
+            if (
+                ((anekpie[i].indexOf('.') !== -1) ||
+                (anekpie[i].indexOf('?') !== -1) ||
+                (anekpie[i].indexOf('.') !== -1)) && (wordsInTitle > 3)) {
+
+                i = maxWordsInTitle + minus;
+
+            }
+            i++;
+
+            if (i === anekpie.length) break;
+            if ((i - minus) < maxWordsInTitle) result += ' ';
+        }
+
+        return result;
+    }
+
+    const id = req.params.id;
+
+    if (id.slice(-5) === '.html') {
+        res.status(301);
+        res.setHeader('Location', '/a/' + req.params.id.slice(0, -5));
+        res.send('');
+    } else {
+        api.anek(req, null, { id })
+            .then(anek => {
+                if (!anek) {
+                    res.status(404);
+                }
+
+                render(req, res, {
+                    view: 'page-anek',
+                    title: generateAnekTitle(anek[0]) + ' - 5ft.ru',
+                    aneks: anek
+                });
+            });
+    }
 });
 
+/**
+ * SEO
+ */
+app.get('/page_:page.html', function (req, res) {
+    res.status(301);
+    res.setHeader('Location', '/p/' + req.params.page + '/');
+    res.send('');
+});
+
+app.get('/rand.html', function (req, res) {
+    res.status(301);
+    res.setHeader('Location', '/random');
+    res.send('');
+});
+
+app.get('/bestweek.html', function (req, res) {
+    res.status(301);
+    res.setHeader('Location', '/bestweek/p/1');
+    res.send('');
+});
+
+app.get('/bestmonth.html', function (req, res) {
+    res.status(301);
+    res.setHeader('Location', '/bestmonth/p/1');
+    res.send('');
+});
+
+app.get('/bestyear.html', function (req, res) {
+    res.status(301);
+    res.setHeader('Location', '/bestyear/p/1');
+    res.send('');
+});
+
+/**
+ * API
+ */
 app.get('/api/aneks/:page', function(req, res) {
     api.aneks(req, res, { page: req.params.page });
 });
